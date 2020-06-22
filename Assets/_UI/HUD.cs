@@ -9,7 +9,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Text Txt_Score = null;
     [SerializeField] private Image Image_Lives = null;
     [SerializeField] private Text Txt_Message = null;
- 
+
     void Start()
     {
         HUDManager = this;
@@ -17,6 +17,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateScore()
     {
+        GameManager.Score += 1;
         Txt_Score.text = "SCORE : " + GameManager.Score;
     }
 
@@ -37,5 +38,11 @@ public class HUD : MonoBehaviour
     public void DismissMessage()
     {
         Txt_Message.text = "";
+    }
+
+    public void PlayerOnHit()
+    {
+        GameManager.Lives -= 1;
+        UpdateLives();
     }
 }

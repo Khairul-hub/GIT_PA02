@@ -11,12 +11,15 @@ public class GameManager : MonoBehaviour
     public static int Lives = 3;
     public static int Score = 0;
 
+    public AudioSource audioSource;
+
     void Start()
     {
         Lives = 3;
         Score = 0;
         Time.timeScale = 0;
         CurrentState = GameState.GameIdle;
+
     }
     
     void Update()
@@ -31,6 +34,12 @@ public class GameManager : MonoBehaviour
         else if(CurrentState == GameState.GameOver && Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(0);
+        }
+
+        if (Lives <= 0)
+        {
+            audioSource.Stop();
+            HUD.HUDManager.GameOver();
         }
     }
 }
